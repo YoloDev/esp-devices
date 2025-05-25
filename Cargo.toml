@@ -1,0 +1,22 @@
+[workspace]
+resolver = "3"
+
+package.edition = "2024"
+package.authors = ["Aleksander Heintz <alxandr@alxandr.me>"]
+package.license = "MIT"
+package.publish = false
+
+members = ["devices/win-door-sensor"]
+
+[profile.dev]
+# Rust debug is too slow.
+# For debug builds always builds with some optimization
+opt-level = "z"
+
+[profile.release]
+codegen-units = 1        # LLVM can perform better optimizations using a single thread
+opt-level = "s"
+lto = "fat"
+debug = 2
+debug-assertions = false
+overflow-checks = false
